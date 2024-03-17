@@ -8,4 +8,4 @@ Kenties kahden tiimin muoto (joukkueet, mutta 2 valmiiksi luotua tiimiä)
 Jotain muuta mitä keksin?
 
 
-Jos tämä ei onnistu tai käy niin esimerkin 1 keskustelusovellus.
+Jos tämä ei onnistu tai käy niin esimerkkien keskustelusovellus.
