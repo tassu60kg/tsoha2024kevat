@@ -1,0 +1,11 @@
+{%if session.username%}
+<p>{{session.username}}</p>
+{%else%}
+<form action="/signup" method="POST">
+<p>nimi
+<input type="text" name="username""></p>
+<p>salasana
+<input type="password" name="password"></p>
+<input type="submit" value="Kirjaudu">
+</form>
+{%endif%}
