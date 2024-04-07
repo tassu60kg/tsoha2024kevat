@@ -4,25 +4,31 @@ pystyy painamaan nappia ja saamaan pisteitä
 pystyy tallentamaan pisteet
 parhaat pisteet näytetään
 
-
-Kuinka testata: (pitäisi toimia en testannut)
+  Kuinka testata: (pitäisi toimia en testannut)
 
 kloonaa tämä repostorio ja luo .env tiedosto johon määrität sisällön seuraavasti
-DATABASE_URL=<tietokannan-paikallinen-osoite>
-SECRET_KEY=<salainen-avain>
+
+DATABASE_URL= >tietokannan-paikallinen-osoite<
+
+SECRET_KEY= >salainen-avain<
 
 Aktivoi virtuaaliympäristö ja asenna riippuvuudet seuraavilla komennoilla
+
 $ python3 -m venv venv
+
 $ source venv/bin/activate
+
 $ pip install -r ./requirements.txt
 
 määritä tietokannan skeema komennolla
+
 $ psql < schema.sql
 
 käynnistä komennolla
+
 $ flask run
 
-Visio: Napinklikkaus web-videopeli;
+  Visio: Napinklikkaus web-videopeli;
 
 käyttäjät luovat tunnuksen jolla kirjautua. Painavat nappia kerätäkseen pisteitä.
 
