@@ -27,8 +27,9 @@ def index():
         db.session.commit()
         print(userid,newscore)
         sql = getthing()
+        leaders = getscores()
         print(sql,"sql")
-        return render_template("index.html",score=sql)
+        return render_template("index.html",score=sql,leaders = leaders)
     else:
         sql = getthing()
         leaders = getscores()
