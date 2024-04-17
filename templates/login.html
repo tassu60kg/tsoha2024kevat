@@ -3,9 +3,18 @@
 {%else%}
 <form action="/login" method="POST">
 <p>nimi
-<input type="text" name="username""></p>
+<input type="text" name="username"></p>
 <p>salasana
 <input type="password" name="password"></p>
-<input type="submit" value="Kirjaudu">
+<input type="submit" value="Kirjaudu">  
 </form>
+<a href="/signup">signup</a>
+<a href="/">return</a><br>
+{% with error = get_flashed_messages() %}
+    {% if error %}
+        {% for errors in error %}
+            {{errors}}
+        {%endfor%}
+    {%endif%}
+{%endwith%}
 {%endif%}

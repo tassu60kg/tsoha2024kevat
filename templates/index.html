@@ -1,6 +1,6 @@
 {%if session.username%}
-<h1>moi</h1>
-<a href="/logout">hei hei</a><br>
+<h1>you are: {{session.username}}</h1>
+<a href="/cliques">cliques</a><br>
 <script>
 var x = 0;
 var oldscore = Number('{{score}}')
@@ -14,15 +14,24 @@ function up(){
 }
 </script>
 Counter: <span id="up">{{score}}</span> <br>
-<button onclick="up()">nappi</button>
+<button onclick="up()">click this</button>
 <form action="/" method="POST">
     <!--this below is the thingy edited by the script-->
 <input type="hidden" value="0" id="formthingy" name="formthing">
 <input type="submit" value="save">
 </form>
-<a>{{leaders}}</a>
-
+<a>top 10 clickers</a>
+{% for i in leaders %}
+<li>{{i[0]}}:{{i[1]}}</li>
+{%endfor%}
+<br>
+<a>top 10 cliques</a>
+{% for i in cliques %}
+<li>{{i[0]}}:{{i[1]}}</li>
+{%endfor%}
+<a href="/logout">logout</a><br>
 {%else%}
+<p>try logging in or creating an user</p>
 <a href="/login">login</a><br>
 <a href="/signup">signup</a>
 {%endif%}
