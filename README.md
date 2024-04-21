@@ -1,46 +1,46 @@
 Napinklikkaus web-videopeli
 
 Tilanne tällä hetkellä:
-pystyy luomaan käyttäjän 
-pystyy painamaan nappia ja saamaan pisteitä
-pystyy tallentamaan pisteet
-parhaat pisteet näytetään
-pystyy liittymään koplaan (clique)
-koplat voivat saavat pisteitä
-parhaat koplat näytetään
-virheet ilmoitetaan
+- pystyy luomaan käyttäjän 
+- pystyy painamaan nappia ja saamaan pisteitä
+- pystyy tallentamaan pisteet
+- parhaat pisteet näytetään
+- pystyy liittymään koplaan (clique)
+- koplat voivat saavat pisteitä
+- parhaat koplat näytetään
+- virheet ilmoitetaan
 
 Puutteet:
-koplasta ei voi poistua
-minimaalinen ja puutteellinen kommentointi
-sivu näyttää huonolta (css tulossa)
-käyttää neljää taulua (viides tulossa salee)
-ei koodin hajautusta (tulee olemaan ongelma)
+- koplasta ei voi poistua
+- minimaalinen ja puutteellinen kommentointi
+- sivu näyttää huonolta (css tulossa)
+- käyttää neljää taulua (viides tulossa salee)
+- ei koodin hajautusta (tulee olemaan ongelma)
 
 
-  Kuinka testata:
+Kuinka testata:
 
 kloonaa tämä repostorio ja luo .env tiedosto johon määrität sisällön seuraavasti
 
-DATABASE_URL= >tietokannan-paikallinen-osoite<
+`DATABASE_URL= <tietokannan-paikallinen-osoite>`
 
-SECRET_KEY= >salainen-avain<
+`SECRET_KEY= <salainen-avain>`
 
 Aktivoi virtuaaliympäristö ja asenna riippuvuudet seuraavilla komennoilla
 
-$ python3 -m venv venv
+`$ python3 -m venv venv`
 
-$ source venv/bin/activate
+`$ source venv/bin/activate`
 
-$ pip install -r ./requirements.txt
+`$ pip install -r ./requirements.txt`
 
 määritä tietokannan skeema komennolla
 
-$ psql < schema.sql
+`$ psql < schema.sql`
 
 käynnistä komennolla
 
-$ flask run
+`$ flask run`
 
   Visio: Napinklikkaus web-videopeli;
 
