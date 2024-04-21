@@ -1,10 +1,24 @@
+Napinklikkaus web-videopeli
+
 Tilanne tällä hetkellä:
 pystyy luomaan käyttäjän 
 pystyy painamaan nappia ja saamaan pisteitä
 pystyy tallentamaan pisteet
 parhaat pisteet näytetään
+pystyy liittymään koplaan (clique)
+koplat voivat saavat pisteitä
+parhaat koplat näytetään
+virheet ilmoitetaan
 
-  Kuinka testata: (pitäisi toimia en testannut)
+Puutteet:
+koplasta ei voi poistua
+minimaalinen ja puutteellinen kommentointi
+sivu näyttää huonolta (css tulossa)
+käyttää neljää taulua (viides tulossa salee)
+ei koodin hajautusta (tulee olemaan ongelma)
+
+
+  Kuinka testata:
 
 kloonaa tämä repostorio ja luo .env tiedosto johon määrität sisällön seuraavasti
 
@@ -39,7 +53,6 @@ Käyttäjät voivat valita tai luoda joukkueen ja kerätä yhdessä tälle piste
 Päivän kestävä 24h parhaat pisteet; kuin perusmuoto, mutta tulostaulukko ja pisteet nollautuisivat keskiyöllä.
 
 Ehkä moderaattoreitä tjsp jolla oikeus poistaa tuloksia.
-Kenties kahden tiimin muoto (joukkueet, mutta 2 valmiiksi luotua tiimiä)
 Jotain muuta mitä keksin?
 
 

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
 {%if session.username%}
 <h1>you are: {{session.username}}</h1>
 <a href="/cliques">cliques</a><br>
@@ -14,7 +15,7 @@ function up(){
 }
 </script>
 Counter: <span id="up">{{score}}</span> <br>
-<button onclick="up()">click this</button>
+<button onclick="up()" class="thebutton">click this</button>
 <form action="/" method="POST">
     <!--this below is the thingy edited by the script-->
 <input type="hidden" value="0" id="formthingy" name="formthing">

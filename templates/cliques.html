@@ -1,11 +1,12 @@
 {%if session.username%}
-<h2>clique page</h2>
-<p>join one of these (coming soon) or create your own idk</p>
-<p>you can't leave once joined (i think)</p>
+<h2>your clique: {{userclique}}</h2>
+<p>type the name of the clique you wish to join or create</p>
+<p>you can't leave once joined yet, please don't join multiple I don't know what will happen</p>
 <form action="/cliques" method="POST">
-<input type="text" name="clique">
+<input type="text" name="clique" maxlength="100">
 <input type="submit" value="submit">
 </form>
+<a href="/">return</a><br>
 {% with error = get_flashed_messages() %}
     {% if error %}
         {% for errors in error %}

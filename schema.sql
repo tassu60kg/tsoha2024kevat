@@ -8,3 +8,16 @@ CREATE TABLE scores (
     score INTEGER,
     user_id INTEGER
 );
+
+CREATE TABLE cliques (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER,
+    clique TEXT
+);
+
+CREATE TABLE clique_score (
+    id SERIAL PRIMARY KEY,
+    clique TEXT,
+    score INTEGER
+
+);
