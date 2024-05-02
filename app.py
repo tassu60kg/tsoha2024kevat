@@ -1,8 +1,6 @@
 from crypt import methods
-import imp
-from flask import Flask, redirect,flash
-#idk why redirect is there twice
-from flask import render_template, request, session, redirect
+#import imp
+from flask import Flask, render_template, request, session, redirect,flash
 from os import getenv
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
@@ -11,16 +9,14 @@ from flask_wtf.csrf import CSRFProtect,CSRFError
 
 
 
-#TODO comment code, remove finnish, maybe find better variable names (last one maybe not)
+#TODO comment code, maybe find better variable names (last one maybe not)
 app=Flask(__name__)
 app.secret_key = getenv("SECRET_KEY")
 app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
 db = SQLAlchemy(app)
 csrf = CSRFProtect()
+csrf.init_app(app)
 
-
-def create_app():
-    csrf.init_app(app)
 
 
 @app.errorhandler(CSRFError)

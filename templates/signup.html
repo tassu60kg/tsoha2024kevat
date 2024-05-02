@@ -3,7 +3,7 @@
 {%else%}
 <p>create user & stuff</p>
 <form action="/signup" method="POST">
-    {{ form.csrf_token }}
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 <p>nimi
 <input type="text" name="username"maxlength="25"></p>
 <p>salasana

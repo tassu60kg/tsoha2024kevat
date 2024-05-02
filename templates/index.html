@@ -5,19 +5,19 @@
 <script>
 var x = 0;
 var oldscore = Number('{{score}}')
-<!--yeah so the vision here is to make a counter thing and edit the hidden form below-->
+
 function up(){
     x++;
     document.getElementById('formthingy').value = x;
     document.getElementById('up').innerText = x+oldscore;
-    //alert(document.getElementById("formthingy").value);
+    
     
 }
 </script>
 Counter: <span id="up">{{score}}</span> <br>
 <button onclick="up()" class="thebutton">click this</button>
 <form action="/" method="POST">
-    {{ form.csrf_token }}
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     <!--this below is the thingy edited by the script-->
 <input type="hidden" value="0" id="formthingy" name="formthing">
 <input type="submit" value="save">
