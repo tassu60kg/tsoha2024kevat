@@ -1,4 +1,5 @@
 from crypt import methods
+import imp
 from flask import Flask, redirect,flash
 #idk why redirect is there twice
 from flask import render_template, request, session, redirect
@@ -6,8 +7,8 @@ from os import getenv
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
-#not yet used
-from secrets import token_hex
+from flask_wtf.csrf import CSRFProtect,CSRFError
+
 
 
 #TODO comment code, remove finnish, maybe find better variable names (last one maybe not)
@@ -15,6 +16,18 @@ app=Flask(__name__)
 app.secret_key = getenv("SECRET_KEY")
 app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
 db = SQLAlchemy(app)
+csrf = CSRFProtect()
+
+
+def create_app():
+    csrf.init_app(app)
+
+
+@app.errorhandler(CSRFError)
+def handle_csrf_error(e):
+    return render_template('csrf_error.html', reason=e.description), 400
+
+
 
 #this setup uses a hidden form (bad idea), if you know a better way please tell me 
 @app.route("/",methods=["POST","GET"])
@@ -30,10 +43,7 @@ def index():
         db.session.execute(text(f"insert into scores (score, user_id) values (:newscore,:userid)"),{"newscore":newscore,"userid":userid})
 
         #this changes the cliques score
-        userclique = db.session.execute(text("select clique from cliques where user_id = :userid"),{"userid":userid}).fetchone()[0]
-        newcliquescore = int(score) + int(db.session.execute(text("select score from clique_score where clique = :clique"),{"clique":userclique}).fetchone()[0])
-        db.session.execute(text("delete from clique_score where clique=:clique"),{"clique":userclique})
-        db.session.execute(text("insert into clique_score (clique,score) values (:clique,:score)"),{"clique":userclique,"score":newcliquescore})
+        cliquescorechanger(userid,score)
 
         db.session.commit()
         #print(userid,newscore)
@@ -47,6 +57,15 @@ def index():
         leaders = getscores()
         cliques=getscores2()
         return render_template("index.html",score = sql,leaders = leaders,cliques=cliques)
+
+def cliquescorechanger(userid,score):
+    try:
+        userclique = db.session.execute(text("select clique from cliques where user_id = :userid"),{"userid":userid}).fetchone()[0]
+        newcliquescore = int(score) + int(db.session.execute(text("select score from clique_score where clique = :clique"),{"clique":userclique}).fetchone()[0])
+        db.session.execute(text("delete from clique_score where clique=:clique"),{"clique":userclique})
+        db.session.execute(text("insert into clique_score (clique,score) values (:clique,:score)"),{"clique":userclique,"score":newcliquescore})
+    except:
+        pass
 
 def getthing(): #gets user score
     try:
@@ -63,7 +82,7 @@ def getuser(): #gets user id
 def getscores(): #gets top 10 users
     return db.session.execute(text("select A.username, B.score from users A, scores B where A.id = B.user_id order by score desc limit 10")).fetchall()
 def getscores2(): #gets top 10 cliques
-    return db.session.execute(text("select clique,score from clique_score order by clique_score desc limit 10")).fetchall()
+    return db.session.execute(text("select clique,score from clique_score order by score desc limit 10")).fetchall()
 
 @app.route("/cliques",methods=["POST","GET"])
 def cliques():
@@ -110,14 +129,14 @@ def login():
         result = db.session.execute(text(sql), {"username":username})
         user = result.fetchone()    
         if not user:
-            flash("whoopsie >__< (this problem was your fault)","warning")
+            flash("whoopsie >__< (wrong username or password)","warning")
             return redirect("/login")
         else:
             hash_value = user.password
             if check_password_hash(hash_value, password):
                 session["username"]=username
             else:
-                flash("whoopsie >__< (this problem was your fault)","warning")
+                flash("whoopsie >__< (wrong username or password)","warning")
                 return redirect("/login")
         
         return redirect("/")
