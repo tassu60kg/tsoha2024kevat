@@ -36,7 +36,8 @@
 <form action="/giveadmin" method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     username
-    <input type="text" name="user"><br><br>
+    <input type="text" name="user"><br>
+    <input type="checkbox" name="bigboss"> big boss status (ability to give and remove admin)<br><br>
     this action can be reversed, are you still sure <br>
     <input type="checkbox" name="yeahimsure"> yeah<br><br>
     <input type="submit" value="empower">

@@ -216,6 +216,11 @@ def giveadmin():
             flash("whoopsie >__< (user not found)","warning")
             return redirect("/admin")
         userid = userid[0]
+        for i in request.form.getlist("bigboss"):
+            db.session.execute(text("insert into admins (user_id,bigboss) values (:user_id,True) "),{"user_id":userid})
+            db.session.commit()
+            flash(f"yay ^v^ (big boss privliges given to {user})","warning")
+            return redirect("/admin")
         db.session.execute(text("insert into admins (user_id,bigboss) values (:user_id,False) "),{"user_id":userid})
         db.session.commit()
         flash(f"yay ^v^ (admin privliges given to {user})","warning")
