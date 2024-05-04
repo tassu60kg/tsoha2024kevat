@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
 {%if session.username%}
 <h1>you are: {{session.username}}</h1>
+{%if adminstatus == True%}
+<a href="/admin">admin</a>
+{%endif%}
 <a href="/cliques">cliques</a><br>
 <script>
 var x = 0;

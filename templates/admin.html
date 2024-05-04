@@ -11,7 +11,7 @@
    
 </form>
 <hr>
-<a>delete clique xd</a>
+<a>delete clique</a>
 <form action="/delclique" method="post">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     clique
@@ -19,6 +19,29 @@
     this action cannot be reversed, are you sure <br>
     <input type="checkbox" name="yeahimsure"> yeah<br><br>
     <input type="submit" value="terminate">
+</form>
+{%if bigboss == True%}
+<hr>
+<a>remove admin from user</a><br>
+<form action="/deladmin" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    username
+    <input type="text" name="user"><br><br>
+    this action cannot be reversed, are you sure <br>
+    <input type="checkbox" name="yeahimsure"> yeah<br><br>
+    <input type="submit" value="terminate">
+</form>
+<hr>
+<a>give admin to user</a><br>
+<form action="/giveadmin" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    username
+    <input type="text" name="user"><br><br>
+    this action can be reversed, are you still sure <br>
+    <input type="checkbox" name="yeahimsure"> yeah<br><br>
+    <input type="submit" value="empower">
+</form>
+{%endif%}
 
 {% with error = get_flashed_messages() %}
     {% if error %}
