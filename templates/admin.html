@@ -1,0 +1,30 @@
+<h1>we admining rn</h1>
+<a href="/">return</a><br>
+<a>delete user xd</a>
+<form action="/deluser" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    username
+    <input type="text" name="user"><br><br>
+    this action cannot be reversed, are you sure <br>
+    <input type="checkbox" name="yeahimsure"> yeah<br><br>
+    <input type="submit" value="terminate">
+   
+</form>
+<hr>
+<a>delete clique xd</a>
+<form action="/delclique" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    clique
+    <input type="text" name="clique"><br><br>
+    this action cannot be reversed, are you sure <br>
+    <input type="checkbox" name="yeahimsure"> yeah<br><br>
+    <input type="submit" value="terminate">
+
+{% with error = get_flashed_messages() %}
+    {% if error %}
+        {% for errors in error %}
+            {{errors}}
+        {%endfor%}
+    {%endif%}
+{%endwith%}
+

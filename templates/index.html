@@ -11,9 +11,10 @@ function up(){
     document.getElementById('formthingy').value = x;
     document.getElementById('up').innerText = x+oldscore;
     
-    
 }
 </script>
+
+
 Counter: <span id="up">{{score}}</span> <br>
 <button onclick="up()" class="thebutton">click this</button>
 <form action="/" method="POST">
@@ -33,6 +34,7 @@ Counter: <span id="up">{{score}}</span> <br>
 {%endfor%}
 <a href="/logout">logout</a><br>
 {%else%}
+<h1>Total score: {{total}}</h1>
 <p>try logging in or creating an user</p>
 <a href="/login">login</a><br>
 <a href="/signup">signup</a>

@@ -1,6 +1,17 @@
 {%if session.username%}
 <p>{{session.username}}</p>
 {%else%}
+
+<script>
+//function dontsubmit(form){
+//    if(len(password) < 1 || len(username) < 1){
+//    alert("missing info")
+//    event.preventDefault();
+//    }
+//}
+//
+</script>
+
 <form action="/login" method="POST">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 <p>nimi

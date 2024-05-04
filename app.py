@@ -1,4 +1,5 @@
 from crypt import methods
+import select
 #import imp
 from flask import Flask, render_template, request, session, redirect,flash
 from os import getenv
@@ -49,10 +50,13 @@ def index():
         cliques=getscores2()
         return render_template("index.html",score=sql,leaders = leaders, cliques=cliques )
     else:
+        total = db.session.execute(text("select sum(score) from scores")).fetchone()[0]
+        if not total:
+            total = "No clicks :("
         sql = getthing()
         leaders = getscores()
         cliques=getscores2()
-        return render_template("index.html",score = sql,leaders = leaders,cliques=cliques)
+        return render_template("index.html",score = sql,leaders = leaders,cliques=cliques,total=total)
 
 def cliquescorechanger(userid,score):
     try:
@@ -70,11 +74,17 @@ def getthing(): #gets user score
     except:
         return 9999
 
+def isadmin(): #checks admin status
+    if db.session.execute(text("select id from users where username=:username"),{"username":session["username"]}).fetchone() in db.session.execute(text("select user_id from admins")).fetchall():
+        return True
+    return False
+
 def getuser(): #gets user id
     try:
         return db.session.execute(text(f"select id from users where username = :username"),{"username":session["username"]}).fetchone()[0]
     except:
         return None
+    
 def getscores(): #gets top 10 users
     return db.session.execute(text("select A.username, B.score from users A, scores B where A.id = B.user_id order by score desc limit 10")).fetchall()
 def getscores2(): #gets top 10 cliques
@@ -115,6 +125,54 @@ def cliquescorehelper(clique):
         return True
     else:
         return False
+    
+@app.route("/admin",methods=["POST","GET"])
+def admin():
+    if request.method == "POST":
+        redirect("/")
+    else:
+        if isadmin() == False:
+            return redirect("/")
+        return render_template("admin.html")
+    
+@app.route("/deluser", methods=["POST"])
+def deluser():
+    for i in request.form.getlist("yeahimsure"):
+        user = request.form["user"]
+        userid = db.session.execute(text("select id from users where username=:user"),{"user":user}).fetchone()
+        if userid == None:
+            flash("whoopsie >__< (user not found)","warning")
+            return redirect("/admin")
+        userid = userid[0]
+        db.session.execute(text("delete from users where id=:id"),{"id":userid})
+        db.session.execute(text("delete from scores where user_id=:user_id"),{"user_id":userid})
+        db.session.execute(text("delete from cliques where user_id=:user_id"),{"user_id":userid})
+        db.session.commit()
+        
+        flash("yay ^v^ (user deleted)","warning")
+        return redirect("/admin")
+
+    flash("aborted >__< (check the box, yeah?)","warning")
+    return redirect("/admin")
+    
+
+
+@app.route("/delclique", methods=["POST"])
+def delclique():
+    for i in request.form.getlist("yeahimsure"):
+        clique = request.form["clique"]
+        if db.session.execute(text("select clique from cliques where clique=:clique"),{"clique":clique}).fetchone() == None:
+            flash("whoopsie >__< (clique not found)","warning")
+            return redirect("/admin")
+        db.session.execute(text("delete from cliques where clique=:clique"),{"clique":clique})
+        db.session.execute(text("delete from clique_score where clique=:clique"),{"clique":clique})
+        db.session.commit()
+
+        flash("yay ^v^ (clique deleted)","warning")
+        return redirect("/admin")
+
+    flash("aborted >__< (check the box, yeah?)","warning")
+    return redirect("/admin")
 
 @app.route("/login",methods=["POST","GET"])
 def login():
