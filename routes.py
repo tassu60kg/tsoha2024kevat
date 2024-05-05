@@ -12,12 +12,12 @@ app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
 db = SQLAlchemy(app)
 
 
-
+#main page
 @app.route("/",methods=["POST","GET"])
 def index():
     if request.method == "POST":
         score = request.form.get('formthing')
-        #dw about the errors
+        #the errors aren't really a problem
 
         #this part changes the users score
         userid = db.session.execute(text(f"select id from users where username = :username"),{"username":session["username"]}).fetchone()[0]
@@ -27,26 +27,32 @@ def index():
 
         #this changes the cliques score
         cliquescorechanger(userid,score)
-
         db.session.commit()
-        #print(userid,newscore)
+
+        #loads page
         sql = getthing()
         leaders = getscores()
-        #print(sql,"sql")
         cliques=getscores2()
         adminstatus = isadmin()
         return render_template("index.html",score=sql,leaders = leaders, cliques=cliques, adminstatus=adminstatus)
     else:
-        total = db.session.execute(text("select sum(score) from scores")).fetchone()[0]
-        if not total:
-            total = "No clicks :("
+        #loads page
+        total = getclicks()
         sql = getthing()
         leaders = getscores()
         cliques=getscores2()
         adminstatus = isadmin()
         return render_template("index.html",score = sql,leaders = leaders,cliques=cliques,total=total, adminstatus=adminstatus)
 
-def cliquescorechanger(userid,score):
+def getclicks():
+    #unsure if needed
+    try:
+        return db.session.execute(text("select sum(score) from scores")).fetchone()[0]
+    except:
+        return "No clicks :("
+
+def cliquescorechanger(userid,score): 
+    #obvious
     try:
         userclique = db.session.execute(text("select clique from cliques where user_id = :userid"),{"userid":userid}).fetchone()[0]
         newcliquescore = int(score) + int(db.session.execute(text("select score from clique_score where clique = :clique"),{"clique":userclique}).fetchone()[0])
@@ -55,13 +61,15 @@ def cliquescorechanger(userid,score):
     except:
         pass
 
-def getthing(): #gets user score
+def getthing(): 
+    #gets user score
     try:
         return (db.session.execute(text("select A.score from scores A, users B where A.user_id = B.id and B.username=:username"),{"username":session["username"]}).fetchone())[0]
     except:
         return 9999
 
-def isadmin(): #checks admin status
+def isadmin(): 
+    #checks admin status
     try:
         if db.session.execute(text("select id from users where username=:username"),{"username":session["username"]}).fetchone() in db.session.execute(text("select user_id from admins")).fetchall():
             return True
@@ -70,6 +78,7 @@ def isadmin(): #checks admin status
         return False
     
 def isbigboss():
+    #checks for higher admin status
     try:
         userid = db.session.execute(text("select id from users where username=:username"),{"username":session["username"]}).fetchone()[0]
         if db.session.execute(text("select bigboss from admins where user_id=:userid"),{"userid":userid}).fetchone()[0] == True:
@@ -78,7 +87,8 @@ def isbigboss():
     except:
         return False
 
-def getuser(): #gets user id
+def getuser(): 
+    #gets user id
     try:
         return db.session.execute(text(f"select id from users where username = :username"),{"username":session["username"]}).fetchone()[0]
     except:
@@ -101,7 +111,7 @@ def cliques():
             return redirect("/cliques")
         userid = getuser()
         if db.session.execute(text("select clique from cliques where user_id = :userid"),{"userid":userid}).fetchone() != None:
-            flash("whoopsie >__< (already joined)","warning")
+            flash("whoopsie >__< (already joined, leave your current one first)","warning")
             return redirect("/cliques")
         #userid = db.session.execute(text(f"select id from users where username = :username"),{"username":session["username"]}).fetchone()[0]
         sql = f"insert into cliques (user_id,clique) values (:userid,:clique)"
@@ -111,7 +121,7 @@ def cliques():
             db.session.execute(text(sql2),{"clique":clique,"score":0})
         db.session.commit()
 
-        return redirect("/")
+        return redirect("/cliques")
     else:
         userid = getuser()
         if db.session.execute(text("select clique from cliques where user_id = :userid"),{"userid":userid}).fetchone() != None:

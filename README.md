@@ -1,22 +1,10 @@
 Napinklikkaus web-videopeli
 
-Tilanne tällä hetkellä:
-- pystyy luomaan käyttäjän 
-- pystyy painamaan nappia ja saamaan pisteitä
-- pystyy tallentamaan pisteet
-- parhaat pisteet näytetään
-- pystyy liittymään koplaan (clique)
-- koplat voivat saavat pisteitä
-- parhaat koplat näytetään
-- virheet ilmoitetaan
-
-Puutteet:
-- koplasta ei voi poistua
-- minimaalinen ja puutteellinen kommentointi
-- sivu näyttää huonolta (css tulossa)
-- käyttää neljää taulua (viides tulossa salee)
-- ei koodin hajautusta (tulee olemaan ongelma)
-
+Ominaisuudet
+Rekisteröityminen kirjautuminen yms
+Paina nappia ja saa pisteitä; parhaat klikkaajat pääsevät tulostaulukolle
+Voit tehdä koplia / liittyä niihin ja kerätä pisteitä yhteistyön voimalla
+Admin/moderointi systeemi (ensimmäinen luotu tili saa adminin)
 
 Kuinka testata:
 
@@ -42,17 +30,5 @@ käynnistä komennolla
 
 `$ flask run`
 
-  Visio: Napinklikkaus web-videopeli;
-
-käyttäjät luovat tunnuksen jolla kirjautua. Painavat nappia kerätäkseen pisteitä.
-
-Eniten pisteitä saaneet käyttäjät (ehkä joku top 10 tai jotain) saavat nimensä tulostaulukolle.
-
-Käyttäjät voivat valita tai luoda joukkueen ja kerätä yhdessä tälle pisteitä; eri tulostaulukko mutta muuten sama.
-
-Päivän kestävä 24h parhaat pisteet; kuin perusmuoto, mutta tulostaulukko ja pisteet nollautuisivat keskiyöllä.
-
-Ehkä moderaattoreitä tjsp jolla oikeus poistaa tuloksia.
-Jotain muuta mitä keksin?
 
 
