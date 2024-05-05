@@ -1,6 +1,6 @@
 Napinklikkaus web-videopeli
 
-- Ominaisuudet
+Ominaisuudet
 - Rekisteröityminen kirjautuminen yms
 - Paina nappia ja saa pisteitä; parhaat klikkaajat pääsevät tulostaulukolle
 - Voit tehdä koplia / liittyä niihin ja kerätä pisteitä yhteistyön voimalla
