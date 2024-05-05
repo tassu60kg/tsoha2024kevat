@@ -1,10 +1,14 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body>
 {%if session.username%}
 <h1>you are: {{session.username}}</h1>
 {%if adminstatus == True%}
 <a href="/admin">admin</a>
 {%endif%}
-<a href="/cliques">cliques</a><br>
+<a href="/cliques">cliques</a>
+<a href="/logout">logout</a>
+<br>
 <script>
 var x = 0;
 var oldscore = Number('{{score}}')
@@ -18,27 +22,34 @@ function up(){
 </script>
 
 
-Counter: <span id="up">{{score}}</span> <br>
+
+
+Counter: <span id="up">{{score}}</span><br>
 <button onclick="up()" class="thebutton">click this</button>
 <form action="/" method="POST">
 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     <!--this below is the thingy edited by the script-->
 <input type="hidden" value="0" id="formthingy" name="formthing">
-<input type="submit" value="save">
+<input type="submit" value="save" class="anotherbutton">
 </form>
-<a>top 10 clickers</a>
+
+<h2>top 10 clickers</h2>
+
 {% for i in leaders %}
-<li>{{i[0]}}:{{i[1]}}</li>
+<ul>{{i[0]}}:{{i[1]}}</ul>
 {%endfor%}
 <br>
-<a>top 10 cliques</a>
+<h2>top 10 cliques</h2>
+
 {% for i in cliques %}
-<li>{{i[0]}}:{{i[1]}}</li>
+<ul>{{i[0]}}:{{i[1]}}</ul>
 {%endfor%}
-<a href="/logout">logout</a><br>
+
+
 {%else%}
 <h1>Total score: {{total}}</h1>
 <p>try logging in or creating an user</p>
-<a href="/login">login</a><br>
+<a href="/login">login</a>
 <a href="/signup">signup</a>
 {%endif%}
+</body>

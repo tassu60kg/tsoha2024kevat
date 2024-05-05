@@ -1,46 +1,49 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
 <h1>we admining rn</h1>
 <a href="/">return</a><br>
-<a>delete user xd</a>
 <form action="/deluser" method="post">
+    <h3>delete user xd</h3>
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     username
     <input type="text" name="user"><br><br>
     this action cannot be reversed, are you sure <br>
     <input type="checkbox" name="yeahimsure"> yeah<br><br>
-    <input type="submit" value="terminate">
+    <input type="submit" value="terminate" class="anotherbutton">
    
 </form>
 <hr>
-<a>delete clique</a>
 <form action="/delclique" method="post">
+    <h3>delete clique</h3>
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     clique
     <input type="text" name="clique"><br><br>
     this action cannot be reversed, are you sure <br>
     <input type="checkbox" name="yeahimsure"> yeah<br><br>
-    <input type="submit" value="terminate">
+    <input type="submit" value="terminate" class="anotherbutton">
 </form>
 {%if bigboss == True%}
 <hr>
-<a>remove admin from user</a><br>
+
 <form action="/deladmin" method="post">
+    <h3>remove admin from user</h3>
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     username
     <input type="text" name="user"><br><br>
     this action cannot be reversed, are you sure <br>
     <input type="checkbox" name="yeahimsure"> yeah<br><br>
-    <input type="submit" value="terminate">
+    <input type="submit" value="terminate" class="anotherbutton">
 </form>
 <hr>
-<a>give admin to user</a><br>
+
 <form action="/giveadmin" method="post">
+    <h3>give admin to user</h3>
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     username
     <input type="text" name="user"><br>
     <input type="checkbox" name="bigboss"> big boss status (ability to give and remove admin)<br><br>
     this action can be reversed, are you still sure <br>
     <input type="checkbox" name="yeahimsure"> yeah<br><br>
-    <input type="submit" value="empower">
+    <input type="submit" value="empower" class="anotherbutton">
 </form>
 {%endif%}
 

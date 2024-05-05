@@ -1,24 +1,16 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
 {%if session.username%}
 <p>{{session.username}}</p>
 {%else%}
 
-<script>
-//function dontsubmit(form){
-//    if(len(password) < 1 || len(username) < 1){
-//    alert("missing info")
-//    event.preventDefault();
-//    }
-//}
-//
-</script>
 
 <form action="/login" method="POST">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-<p>nimi
+<p>username
 <input type="text" name="username"></p>
-<p>salasana
+<p>password
 <input type="password" name="password"></p>
-<input type="submit" value="Kirjaudu">  
+<input type="submit" value="login" class="anotherbutton">  
 </form>
 <a href="/signup">signup</a>
 <a href="/">return</a><br>

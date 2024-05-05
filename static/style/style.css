@@ -1,10 +1,58 @@
-/* yet to be implemented */
+/* stylish sheet */
+body {
+    margin: 30%;
+    margin-top: 3%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    max-width: 45em;
+    font-size: larger;
+    background-color: rgb(90, 90, 90);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    
+    
+}
+
+a{
+    color: rgb(61, 186, 186);
+    text-decoration: none;
+}
+
+a:hover{
+    color: rgb(59, 164, 164);
+    
+}
+
+
+form{
+    background: rgb(62, 61, 61);
+    margin: 6%;
+    padding: 5%;
+    border-radius: 25px;
+}
+
+
+
+ul {
+    display: inline-block;
+    padding: 0.5em;
+
+}
 
 .thebutton {
-    background: rgb(74, 180, 148);
+    background: rgb(224, 224, 224);
     color: #000000;
     padding: 40px;
-    border: 20px rgb(0, 0, 0);
+    border: 3px rgb(0, 0, 0) outset;
     margin: 20px ;
     
+}
+.thebutton:hover{background: rgb(158, 158, 158);}
+
+.thebutton:active{background: rgb(150, 150, 158);}
+
+.anotherbutton{
+    background: rgb(195, 194, 194);
+    color:#000000;
+    padding: 8px;
+    margin: 10px;
 }

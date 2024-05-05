@@ -1,14 +1,14 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
 {%if session.username%}
 <p>{{session.username}}</p>
 {%else%}
-<p>create user & stuff</p>
 <form action="/signup" method="POST">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-<p>nimi
+<p>username
 <input type="text" name="username"maxlength="25"></p>
-<p>salasana
+<p>password
 <input type="password" name="password" maxlength="100"></p>
-<input type="submit" value="create user">
+<input type="submit" value="create user" class="anotherbutton">
 </form>
 <a href="/">return</a><br>
 {% with error = get_flashed_messages() %}

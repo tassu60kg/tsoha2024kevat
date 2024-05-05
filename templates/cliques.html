@@ -1,7 +1,8 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
 {%if session.username%}
 <h2>your clique: {{userclique}}</h2>
 <p>type the name of the clique you wish to join or create</p>
-<p>you can't leave once joined yet, please don't join multiple I don't know what will happen</p>
+<p>you can't leave unless your clique gets terminated</p>
 <form action="/cliques" method="POST">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 <input type="text" name="clique" maxlength="100">
