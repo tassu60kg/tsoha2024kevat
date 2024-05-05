@@ -134,12 +134,20 @@ def cliques():
             return render_template("cliques.html",userclique=userclique)
         else:
             return render_template("cliques.html",userclique="none :(")
+
+@app.route("/leaveclique",methods=["POST"])
+def leaveclique():
+    userid = getuser()
+    db.session.execute(text("delete from cliques where user_id=:userid"),{"userid":userid})
+    db.session.commit()
+    return redirect("/cliques")
+
 def cliquescorehelper(clique):    
     if db.session.execute(text(f"select clique from clique_score where clique = :clique"),{"clique":clique}).fetchone() == None:
         return True
     else:
         return False
-    
+
 @app.route("/admin",methods=["GET"])
 def admin():
     if isadmin() == False:
