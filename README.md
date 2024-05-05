@@ -1,10 +1,10 @@
 Napinklikkaus web-videopeli
 
-Ominaisuudet
-Rekisteröityminen kirjautuminen yms
-Paina nappia ja saa pisteitä; parhaat klikkaajat pääsevät tulostaulukolle
-Voit tehdä koplia / liittyä niihin ja kerätä pisteitä yhteistyön voimalla
-Admin/moderointi systeemi (ensimmäinen luotu tili saa adminin)
+- Ominaisuudet
+- Rekisteröityminen kirjautuminen yms
+- Paina nappia ja saa pisteitä; parhaat klikkaajat pääsevät tulostaulukolle
+- Voit tehdä koplia / liittyä niihin ja kerätä pisteitä yhteistyön voimalla
+- Admin/moderointi systeemi (ensimmäinen luotu tili saa adminin)
 
 Kuinka testata:
 
