@@ -21,3 +21,11 @@ CREATE TABLE clique_score (
     score INTEGER
 
 );
+
+CREATE TABLE admins (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER,
+    bigboss BOOLEAN
+);
+
+INSERT INTO admins (user_id, bigboss) VALUES (1,True);
